@@ -1,14 +1,29 @@
-# Coloque em maiúscula a primeira letra de cada frase na string:
+# Coloque em maiúsculo a primeira letra de cada frase na string:
 
-def capitalizar_frase(frase):
-    string_capitalizada = frase.title()
-    return string_capitalizada
 
-frase1 = capitalizar_frase('ana foi correr na praia')
-print(frase1)
 
-frase2 = capitalizar_frase('fui ao mercado na segunda-feira.')
-print(frase2)
+def capitalizar_sentences(string):
+    result = ''
+    capitalizar_prox = True
 
-frase3 = capitalizar_frase('dancei na praia, a luz da lua.')
-print(frase3)
+    for char in string:
+        if capitalizar_prox and char.isalpha():
+            char = char.upper()
+            capitalizar_prox = False
+        elif char in ['.', '!', '?']:
+            capitalizar_prox = True
+        elif char == ' ' and result.endswith('.'):
+            capitalizar_prox = True
+
+        result += char
+    
+
+    return result
+
+teste1 = "ana correu. foi ao parque, e acabou se machucando. tadinha."
+print(capitalizar_sentences(teste1))
+
+teste2 = "ana correu. dançou, e comeu."
+print(capitalizar_sentences(teste2))
+teste3 = "elias foi ao cinema, e esqueceu sua carteira. sua memoria já não é a mesma! a vida é complicada."
+print(capitalizar_sentences(teste3))
